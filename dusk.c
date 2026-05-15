@@ -1586,12 +1586,14 @@ configurenotify(XConfigureEvent *ev)
 		for (c = ws->clients; c; c = c->next) {
 			c->sfx += c->ws->wx;
 			c->sfy += c->ws->wy;
-			if (ISTRUEFULLSCREEN(c))
-				resizeclient(c, ws->mon->mx, ws->mon->my, ws->mon->mw, ws->mon->mh);
-			else if (ISFLOATING(c)) {
-				c->x = c->sfx;
-				c->y = c->sfy;
-				XMoveWindow(dpy, c->win, c->x, c->y);
+			if (ISVISIBLE(c)) {
+				if (ISTRUEFULLSCREEN(c))
+					resizeclient(c, ws->mon->mx, ws->mon->my, ws->mon->mw, ws->mon->mh);
+				else if (ISFLOATING(c)) {
+					c->x = c->sfx;
+					c->y = c->sfy;
+					XMoveWindow(dpy, c->win, c->x, c->y);
+				}
 			}
 		}
 		removepreview(ws);
