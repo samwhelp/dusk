@@ -162,7 +162,7 @@ dump_client(yajl_gen gen, Client *c)
 
 		YSTR("flags"); YMAP(
 			for (i = 0; flag_names[i].name != NULL; i++) {
-				YSTR(flag_names[i].name); YBOOL(c->flags & flag_names[i].value);
+				YSTR(flag_names[i].name); YBOOL((c->flags & flag_names[i].value) > 0);
 			}
 		)
 	)
