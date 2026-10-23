@@ -3088,7 +3088,7 @@ resizeclientpad(Client *c, int x, int y, int w, int h, int tw, int th)
 			c->y = wc.y += (th - h) / 2;
 	}
 
-	if (MOVEPLACE(c)) {
+	if (MOVEPLACE(c) || !ISVISIBLE(c)) {
 		addflag(c, NeedResize);
 		return;
 	}
