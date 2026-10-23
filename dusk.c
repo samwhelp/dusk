@@ -1366,7 +1366,11 @@ clientmessage(XEvent *e)
 		arrange(c->ws);
 		drawbar(c->ws->mon);
 	} else if (cme->message_type == netatom[NetWMMoveResize]) {
-		resizemouse(&((Arg) { .v = c }));
+		if (cme->data.l[2] == 8) {
+			movemouse(&((Arg) { .v = c }));
+		} else {
+			resizemouse(&((Arg) { .v = c }));
+		}
 	}
 }
 
