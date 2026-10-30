@@ -2170,8 +2170,8 @@ gettextprop(Window w, Atom atom, char **text)
 		if (text != NULL) {
 			*text = strdup((char *)name.value);
 		}
-	} else if (XmbTextPropertyToTextList(dpy, &name, &list, &n) >= Success && n > 0 && *list) {
-		if (text != NULL) {
+	} else if (XmbTextPropertyToTextList(dpy, &name, &list, &n) >= Success) {
+		if (text != NULL && n > 0 && *list) {
 			*text = strdup(*list);
 		}
 		XFreeStringList(list);
