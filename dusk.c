@@ -1552,6 +1552,9 @@ configurenotify(XConfigureEvent *ev)
 	if (ev->window != root)
 		return NULL;
 
+	if (ev->width <= 0 || ev->height <= 0)
+		return NULL;
+
 	if (enabled(Debug)) {
 		fprintf(stderr, "configurenotify: received event for root window\n");
 		fprintf(stderr, "    - x = %d, y = %d, w = %d, h = %d\n", ev->x, ev->y, ev->width, ev->height);
